@@ -1,0 +1,35 @@
+<table *ngIf="trenutniItems">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{trenutniItems["id"]}}</td>
+    <td>{{trenutniItems["title"]}}</td>
+    <td>{{trenutniItems["image"]}}</td>
+    <td>{{trenutniItems["description"]}}</td>
+    <td>{{trenutniItems["price"]}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_USER']) && trenutniItems">
+  <p>Izmeni item</p>
+  <form (ngSubmit)="izmeni()">
+    <input type="text" name="title"  value="trenutniItems.title" placeholder="Title" [(ngModel)]="trenutniItems.title" required="true">
+    <br>
+    <input type="text" name="image" value="trenutniItems.image" placeholder="Image" [(ngModel)]="trenutniItems.image" required="true">
+    <br>
+    <input type="text" name="description" value="trenutniItems.description" placeholder="Description" [(ngModel)]="trenutniItems.description" required="true">
+    <br>
+    <input type="number" name="price" value="trenutniItems.price" placeholder="Price" [(ngModel)]="trenutniItems.price" required="true">
+    <br>
+    <input type="submit" value="Izmeni item">
+  </form>
+</div>

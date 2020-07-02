@@ -1,0 +1,37 @@
+<div *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_USER'])">
+  <p>Dodaj nov item</p>
+  <form (ngSubmit)="dodavanje()">
+    <input type="text" name="title" placeholder="Title" [(ngModel)]="dodatItems.title" required="true">
+    <br>
+    <input type="text" name="image" placeholder="Image" [(ngModel)]="dodatItems.image" required="true">
+    <br>
+    <input type="text" name="description" placeholder="Description" [(ngModel)]="dodatItems.description" required="true">
+    <br>
+    <input type="number" name="price" placeholder="Price" [(ngModel)]="dodatItems.price" required="true">
+    <br>
+    <input type="submit" value="Dodaj item">
+  </form>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of items">
+    <td>{{i["title"]}}</td>
+    <td>{{i["image"]}}</td>
+    <td>{{i["description"]}}</td>
+    <td>{{i["price"]}}</td>
+    <td>
+      <button *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_USER'])" (click)="brisanje(i['id'])">Brisanje</button>
+      <button (click)="detalji(i['id'])">Detalji</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

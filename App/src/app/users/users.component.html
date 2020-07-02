@@ -1,0 +1,35 @@
+
+<div *ngIf="loginService.validateRoles(['ROLE_ADMIN'])">
+  <p>Dodaj novog usera</p>
+  <form (ngSubmit)="dodavanje()">
+    <input type="text" name="username" placeholder="Username" [(ngModel)]="dodatUser.username" required="true">
+    <br>
+    <input type="password" name="password" placeholder="Password" [(ngModel)]="dodatUser.password" required="true">
+    <br>
+    <input type="checkbox" name="admin" value="ROLE_ADMIN" (change)="dodajRole($event)">Admin
+    <br>
+    <input type="checkbox" name="user" value="ROLE_USER" (change)="dodajRole($event)">User
+    <br>
+    <input type="submit" value="Dodaj usera">
+  </form>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Roles</th>
+    <th>Akcije</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let u of users">
+    <td>{{u["username"]}}</td>
+    <td>{{u["roles"]}}</td>
+    <td>
+      <button *ngIf="loginService.validateRoles(['ROLE_ADMIN'])" (click)="brisanje(u['id'])">Brisanje</button>
+      <button (click)="detalji(u['id'])">Detalji</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
